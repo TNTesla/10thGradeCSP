@@ -1,4 +1,4 @@
-import tkinter
+from tkinter import *
 import random
 from tkinter import messagebox
 import copy
@@ -17,13 +17,13 @@ root.config(bg="white")
 
 #defining variables
 
-
+infLo = 0
 
 #defining functions
 
 def click_handler(event):
     if event.num == 2:
-        return 
+        Cell(event.x, event.y) 
 
 def Cell(x, y):
     canvas.create_line(x, y, x+8, y, width = 5, fill='yellow')
@@ -50,7 +50,7 @@ for i in range(25):
 for i in range(25):
     grid.append(copy.deepcopy(row))
 
-
+root.bind("<Button>", click_handler)
 
 #keeping the interface up
 root.mainloop()
