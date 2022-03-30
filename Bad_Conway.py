@@ -2,6 +2,7 @@ from tkinter import *
 import random
 from tkinter import messagebox
 import copy
+import math
 
 #create a root window
 
@@ -17,20 +18,22 @@ root.config(bg="white")
 
 #defining variables
 
-infLo = 0
+Alv = 1
+Ded = 0
 
 #defining functions
 
 def click_handler(event):
-    if event.num == 2:
+    if event.num == 1 and row[event.y] == Ded and column[event.x] == Ded:
         Cell(event.x, event.y) 
 
 def Cell(x, y):
-    canvas.create_line(x, y, x+8, y, width = 5, fill='yellow')
+    r = math.floor((x+5)/10)
+    x = r*10
+    z = math.floor((y+5)/10)
+    y = z*10
+    canvas.create_line(x-5, y-1, x+4, y-1, width = 9, fill='yellow')
     
-
-def togCel(x, y):
-    pass
 
 #making a lot of lines and shit
 
@@ -43,11 +46,11 @@ canvas.create_line(4, 4, 505, 4)
 
 canvas.pack()
 
-grid = []
+column = []
 row = []
-for i in range(25):
+for i in range(50):
     row.append(0)
-for i in range(25):
+for i in range(50):
     grid.append(copy.deepcopy(row))
 
 root.bind("<Button>", click_handler)
