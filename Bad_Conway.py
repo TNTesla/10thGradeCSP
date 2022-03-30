@@ -14,7 +14,7 @@ canvas = Canvas(root, width=506, height=506, bg = "#4F4F4F")
 #config window size and color and title and whatever
 root.title("Conway's Game of Life (reconstructed by Mark Anthony)")
 root.geometry("510x540")
-root.config(bg="#2F2F2F")
+root.config(bg="#3C3C3C")
 
 #defining variables
 
@@ -24,7 +24,7 @@ Ded = 0
 #defining functions
 
 def click_handler(event):
-    if event.num == 1 and row[math.floor((event.y-5)/10)] == Ded and column[math.floor((event.x-5)/10)] == Ded:
+    if event.num == 1 and grid[math.floor((event.x-5)/10)][math.floor((event.y-5)/10)] == Ded:
         Cell(event.x, event.y)
     else:
         Uncell(event.x, event.y)
@@ -35,8 +35,7 @@ def Cell(x, y):
     z = math.floor((y+5)/10)
     y = z*10
     canvas.create_line(x-5, y-1, x+4, y-1, width = 9, fill='yellow')
-    column[math.floor((x-5)/10)] = Alv
-    row[math.floor((y-5)/10)] = Alv
+    grid[math.floor((x-5)/10)][math.floor((y-5)/10)] = Alv
     
 def Uncell(x, y):
     r = math.floor((x+5)/10)
@@ -44,8 +43,23 @@ def Uncell(x, y):
     z = math.floor((y+5)/10)
     y = z*10
     canvas.create_line(x-5, y-1, x+4, y-1, width = 9, fill='#4F4F4F')
-    column[math.floor((x-5)/10)] = Ded
-    row[math.floor((y-5)/10)] = Ded
+    grid[math.floor((x-5)/10)][math.floor((y-5)/10)] = Ded
+
+#
+
+    #The big boy; generation difference coding.
+
+def gigaSuperHell():
+        #the loops to check each block
+    for a in range(50):
+        for b in range(50):
+            
+            #the loops to scan if alive cells stay alive
+            if grid[a][b] == Alv:
+                    if grid[a-1][b-1] ==Alv:
+                        pass
+
+
 
 #making a lot of lines and shit
 
@@ -56,13 +70,13 @@ for i in range(51):
 canvas.create_line(4, 4, 4, 505)
 canvas.create_line(4, 4, 505, 4)
 
-column = []
+grid = []
 row = []
 for i in range(50):
     row.append(0)
 for i in range(50):
-    column.append(0)
-    
+    grid.append(copy.deepcopy(row))
+
 canvas.pack()
 
 root.bind("<Button>", click_handler)
