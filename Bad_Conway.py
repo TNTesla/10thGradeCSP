@@ -62,28 +62,28 @@ def Uncell(x, y):
 #The big boy; generation coding.
 
 def gigaSuperHell():
-    
     #the loops to check each block
+    gridOld = grid
     for a in range(50):
         for b in range(50):
             alvNeigh = 0
             #the loops to scan 'neighbors'
-            if grid[a][b] == Alv:
-                    if grid[a-1][b-1] ==Alv:
+            if gridOld[a][b] == Alv:
+                    if gridOld[a-1][b-1] ==Alv:
                         alvNeigh += 1
-                    if grid[a][b-1] ==Alv:
+                    if gridOld[a][b-1] ==Alv:
                         alvNeigh += 1
-                    if grid[a+1][b-1] ==Alv:
+                    if gridOld[a+1][b-1] ==Alv:
                         alvNeigh += 1
-                    if grid[a-1][b] ==Alv:
+                    if gridOld[a-1][b] ==Alv:
                         alvNeigh += 1
-                    if grid[a+1][b] ==Alv:
+                    if gridOld[a+1][b] ==Alv:
                         alvNeigh += 1
-                    if grid[a-1][b+1] ==Alv:
+                    if gridOld[a-1][b+1] ==Alv:
                         alvNeigh += 1
-                    if grid[a][b+1] ==Alv:
+                    if gridOld[a][b+1] ==Alv:
                         alvNeigh += 1
-                    if grid[a+1][b+1] ==Alv:
+                    if gridOld[a+1][b+1] ==Alv:
                         alvNeigh += 1
                     #killing/spawning cells
                     if alvNeigh <= 1:
@@ -98,30 +98,31 @@ def gigaSuperHell():
                     
                     alvNeigh = 0
             
-            if grid[a][b] == Ded:
-                    if grid[a-1][b-1] ==Alv:
-                        alvNeigh += 1
-                    if grid[a][b-1] ==Alv:
-                        alvNeigh += 1
-                    if grid[a+1][b-1] ==Alv:
-                        alvNeigh += 1
-                    if grid[a-1][b] ==Alv:
-                        alvNeigh += 1
-                    if grid[a+1][b] ==Alv:
-                        alvNeigh += 1
-                    if grid[a-1][b+1] ==Alv:
-                        alvNeigh += 1
-                    if grid[a][b+1] ==Alv:
-                        alvNeigh += 1
-                    if grid[a+1][b+1] ==Alv:
-                        alvNeigh += 1
+            if gridOld[a][b] == Ded:
+                if gridOld[a-1][b-1] ==Alv:
+                    alvNeigh += 1
+                if gridOld[a][b-1] ==Alv:
+                    alvNeigh += 1
+                if gridOld[a+1][b-1] ==Alv:
+                    alvNeigh += 1
+                if gridOld[a-1][b] ==Alv:
+                    alvNeigh += 1
+                if gridOld[a+1][b] ==Alv:
+                    alvNeigh += 1
+                if gridOld[a-1][b+1] ==Alv:
+                    alvNeigh += 1
+                if gridOld[a][b+1] ==Alv:
+                    alvNeigh += 1
+                if gridOld[a+1][b+1] ==Alv:
+                    alvNeigh += 1
+                
+                #killing/spawning cells
+                if alvNeigh == 3:
+                    grid[a][b] = Alv
+                    canvas.create_line((a+1)*10-5, (b+1)*10-1, (a+1)*10+4, (b+1)*10-1, width = 9, fill='yellow')
                     
-                    #killing/spawning cells
-                    if alvNeigh == 3:
-                        grid[a][b] = Alv
-                        canvas.create_line((a+1)*10-5, (b+1)*10-1, (a+1)*10+4, (b+1)*10-1, width = 9, fill='yellow')
-                    
-                    alvNeigh = 0
+                alvNeigh = 0
+    print(grid)
 
 
 
@@ -129,7 +130,7 @@ def gigaSuperHell():
 #Making the button for the god forsaken generation code
 
 btn = Button(root, text = "                                                Run one Generation                                                ", font = ("Arial", 12), bg = "#4F4F4F", fg = "black", command = gigaSuperHell)
-btn.place(x = 400, y = 510)
+btn.place(x = 240, y = 510)
 
 #making a lot of lines and shit
 
